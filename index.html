@@ -1,143 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Budget — Smart Personal Finance</title>
-  <meta name="description" content="Track expenses, manage wallets, plan budgets and understand your spending with My Budget for Android."/>
-  <link rel="stylesheet" href="shared.css"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Budget — Smart Personal Finance</title>
+    <meta name="description"
+        content="Track expenses, manage wallets, plan budgets and understand your spending with My Budget for Android." />
+    <link rel="stylesheet" href="shared.css" />
 </head>
+
 <body>
-<nav id="navbar">
-  <a href="index.html" class="nav-logo">
-    <img src="ic_launcher_monochrome.png" alt="My Budget Logo">
-    <span>My Budget</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="index.html" id="nav-home">Home</a></li>
-    <li><a href="features.html" id="nav-features">Features</a></li>
-    <li><a href="support.html" id="nav-support">Support</a></li>
-    <li><a href="privacy.html" id="nav-privacy">Privacy</a></li>
-    <li><a href="#download" class="nav-cta">Download</a></li>
-  </ul>
-</nav>
-
-
-<section style="min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:68px;">
-  <div class="glow" style="width:600px;height:600px;background:rgba(227,196,109,0.08);top:-100px;right:-100px;"></div>
-  <div class="glow" style="width:400px;height:400px;background:rgba(173,207,174,0.05);bottom:-50px;left:-50px;"></div>
-  <div style="max-width:1200px;margin:0 auto;padding:96px 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;width:100%;">
-    <div class="reveal">
-      <div class="chip" style="margin-bottom:24px;">&#10022; Now Available on Android</div>
-      <h1 style="font-size:clamp(38px,5vw,64px);margin-bottom:24px;line-height:1.05;">
-        Your money,<br/><span style="color:var(--primary);">finally clear.</span>
-      </h1>
-      <p style="font-size:18px;color:var(--on-surface-variant);max-width:480px;margin-bottom:40px;line-height:1.75;">
-        Multiple wallets, smart budgets, recurring transactions and beautiful analytics — all in one private, offline-first app.
-      </p>
-      <div style="display:flex;gap:16px;flex-wrap:wrap;">
-        <a href="#download" class="btn btn-primary">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76A1.5 1.5 0 0 0 4.5 24c.28 0 .57-.07.83-.22l11.65-6.6-2.96-2.96-10.84 8.54zM.23 1.01A1.5 1.5 0 0 0 0 1.75v20.5c0 .27.06.52.17.74l.09.13 11.5-11.5v-.27L.32.88l-.09.13zM20.47 9.65l-3.03-1.72-3.28 3.28 3.28 3.28 3.05-1.73a1.75 1.75 0 0 0 0-3.11zM3.18.24l10.84 8.55 2.96-2.96L5.33.23A1.5 1.5 0 0 0 3.18.24z"/></svg>
-          Get on Google Play
+    <nav id="navbar">
+        <a href="index.html" class="nav-logo">
+            <img src="logo.png" alt="My Budget Logo">
+            <span>My Budget</span>
         </a>
-        <a href="features.html" class="btn btn-outline">Explore Features &#8594;</a>
-      </div>
-    </div>
-    <div class="reveal" style="display:flex;justify-content:center;align-items:center;position:relative;">
-      <div style="width:280px;height:580px;background:var(--surface);border:2px solid rgba(227,196,109,0.2);border-radius:40px;padding:20px;position:relative;box-shadow:0 40px 100px rgba(0,0,0,0.6);">
-        <div style="display:flex;justify-content:space-between;padding:4px 8px;margin-bottom:16px;">
-          <span style="font-size:11px;color:var(--on-surface-variant);">9:41</span>
-          <span style="font-size:11px;color:var(--on-surface-variant);">&#9679;&#9679;&#9679;</span>
+        <ul class="nav-links">
+            <li><a href="index.html" id="nav-home">Home</a></li>
+            <li><a href="features.html" id="nav-features">Features</a></li>
+            <li><a href="support.html" id="nav-support">Support</a></li>
+            <li><a href="privacy.html" id="nav-privacy">Privacy</a></li>
+            <li><a href="#download" class="nav-cta">Download</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- ══ HERO ══ -->
+    <section
+        style="min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:68px;">
+        <div class="glow" style="width:600px;height:600px;background:rgba(227,196,109,0.08);top:-100px;right:-100px;">
         </div>
-        <div style="background:linear-gradient(135deg,#584400,#3D2F00);border-radius:20px;padding:20px;margin-bottom:16px;border:1px solid rgba(227,196,109,0.3);">
-          <div style="font-size:11px;color:var(--secondary);margin-bottom:4px;">Total Balance</div>
-          <div style="font-size:26px;font-family:'Syne',sans-serif;font-weight:700;color:var(--primary);">UGX 2,450,000</div>
-          <div style="display:flex;gap:16px;margin-top:12px;">
-            <div><div style="font-size:10px;color:var(--tertiary);">&#8593; Income</div><div style="font-size:13px;color:var(--on-bg);font-weight:600;">580,000</div></div>
-            <div><div style="font-size:10px;color:var(--error);">&#8595; Expense</div><div style="font-size:13px;color:var(--on-bg);font-weight:600;">230,000</div></div>
-          </div>
+        <div class="glow" style="width:400px;height:400px;background:rgba(173,207,174,0.05);bottom:-50px;left:-50px;">
         </div>
-        <div style="display:flex;gap:8px;margin-bottom:16px;overflow:hidden;">
-          <div style="background:rgba(227,196,109,0.15);border:1px solid rgba(227,196,109,0.3);border-radius:12px;padding:8px 12px;flex-shrink:0;"><div style="font-size:9px;color:var(--secondary);">Cash</div><div style="font-size:12px;color:var(--primary);font-weight:600;">450,000</div></div>
-          <div style="background:rgba(173,207,174,0.1);border:1px solid rgba(173,207,174,0.2);border-radius:12px;padding:8px 12px;flex-shrink:0;"><div style="font-size:9px;color:var(--secondary);">Bank</div><div style="font-size:12px;color:var(--tertiary);font-weight:600;">1,800,000</div></div>
-          <div style="background:rgba(213,197,161,0.1);border:1px solid rgba(213,197,161,0.15);border-radius:12px;padding:8px 12px;flex-shrink:0;"><div style="font-size:9px;color:var(--secondary);">Savings</div><div style="font-size:12px;color:var(--secondary);font-weight:600;">200,000</div></div>
+
+        <div
+            style="max-width:1200px;margin:0 auto;padding:96px 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;width:100%;">
+
+            <div class="reveal">
+                <div class="chip" style="margin-bottom:24px;">&#10022; Now Available on Android</div>
+                <h1 style="font-size:clamp(38px,5vw,64px);margin-bottom:24px;line-height:1.05;">
+                    Your money,<br /><span style="color:var(--primary);">finally clear.</span>
+                </h1>
+                <p
+                    style="font-size:18px;color:var(--on-surface-variant);max-width:480px;margin-bottom:40px;line-height:1.75;">
+                    Multiple wallets, smart budgets, recurring transactions and beautiful analytics &mdash; all in one
+                    private, offline-first app.
+                </p>
+                <div style="display:flex;gap:16px;flex-wrap:wrap;">
+                    <a href="#download" class="btn btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M3.18 23.76A1.5 1.5 0 0 0 4.5 24c.28 0 .57-.07.83-.22l11.65-6.6-2.96-2.96-10.84 8.54zM.23 1.01A1.5 1.5 0 0 0 0 1.75v20.5c0 .27.06.52.17.74l.09.13 11.5-11.5v-.27L.32.88l-.09.13zM20.47 9.65l-3.03-1.72-3.28 3.28 3.28 3.28 3.05-1.73a1.75 1.75 0 0 0 0-3.11zM3.18.24l10.84 8.55 2.96-2.96L5.33.23A1.5 1.5 0 0 0 3.18.24z" />
+                        </svg>
+                        Get on Google Play
+                    </a>
+                    <a href="features.html" class="btn btn-outline">Explore Features &#8594;</a>
+                </div>
+            </div>
+
+            <!-- APP SCREENSHOT -->
+            <div class="reveal" style="display:flex;justify-content:center;align-items:center;">
+                <img src="screenshot.png" alt="My Budget App Screenshot"
+                    style="max-width:100%;max-height:680px;object-fit:contain;filter:drop-shadow(0 32px 64px rgba(0,0,0,0.6)); scale: 1.5;" />
+            </div>
+
         </div>
-        <div style="font-size:11px;color:var(--on-surface-variant);margin-bottom:10px;font-weight:600;letter-spacing:0.5px;">RECENT</div>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--surface-2);border-radius:12px;"><div style="display:flex;gap:10px;align-items:center;"><div style="width:32px;height:32px;background:rgba(255,180,171,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;">&#128722;</div><div><div style="font-size:12px;color:var(--on-bg);font-weight:500;">Groceries</div><div style="font-size:10px;color:var(--on-surface-variant);">Today</div></div></div><div style="font-size:13px;color:var(--error);font-weight:600;">-45,000</div></div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--surface-2);border-radius:12px;"><div style="display:flex;gap:10px;align-items:center;"><div style="width:32px;height:32px;background:rgba(173,207,174,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;">&#128188;</div><div><div style="font-size:12px;color:var(--on-bg);font-weight:500;">Salary</div><div style="font-size:10px;color:var(--on-surface-variant);">Yesterday</div></div></div><div style="font-size:13px;color:var(--tertiary);font-weight:600;">+580,000</div></div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--surface-2);border-radius:12px;"><div style="display:flex;gap:10px;align-items:center;"><div style="width:32px;height:32px;background:rgba(227,196,109,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;">&#128260;</div><div><div style="font-size:12px;color:var(--on-bg);font-weight:500;">Transfer</div><div style="font-size:10px;color:var(--on-surface-variant);">Mon</div></div></div><div style="font-size:13px;color:var(--primary);font-weight:600;">&#8594; Bank</div></div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══ FEATURE HIGHLIGHTS ══ -->
+    <section class="section">
+        <div class="section-label">What's inside</div>
+        <h2 class="section-title">Everything you need,<br />nothing you don't.</h2>
+        <p class="section-sub">Built for people who want real control over their finances &mdash; not just another
+            expense logger.</p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;" class="reveal">
+            <div class="card" style="border-top:3px solid var(--primary);">
+                <div style="font-size:32px;margin-bottom:16px;">&#128179;</div>
+                <h3 style="font-size:18px;margin-bottom:10px;color:var(--on-bg);">Multiple Wallets</h3>
+                <p style="color:var(--on-surface-variant);font-size:14px;line-height:1.7;">Cash, Bank, Credit Card,
+                    Digital Wallet, Savings &mdash; each with its own currency, colour, and live balance.</p>
+            </div>
+            <div class="card" style="border-top:3px solid var(--tertiary);">
+                <div style="font-size:32px;margin-bottom:16px;">&#128202;</div>
+                <h3 style="font-size:18px;margin-bottom:10px;color:var(--on-bg);">Smart Budgets</h3>
+                <p style="color:var(--on-surface-variant);font-size:14px;line-height:1.7;">Recurring budgets with
+                    rollover, alert thresholds, and real-time statuses so you always know where you stand.</p>
+            </div>
+            <div class="card" style="border-top:3px solid var(--secondary);">
+                <div style="font-size:32px;margin-bottom:16px;">&#128200;</div>
+                <h3 style="font-size:18px;margin-bottom:10px;color:var(--on-bg);">Rich Analytics</h3>
+                <p style="color:var(--on-surface-variant);font-size:14px;line-height:1.7;">Pie charts, line charts,
+                    savings rate rings and category breakdowns &mdash; all responding to your date range.</p>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<div class="divider"></div>
+    <div class="divider"></div>
 
-<section class="section">
-  <div class="section-label">What's inside</div>
-  <h2 class="section-title">Everything you need,<br/>nothing you don't.</h2>
-  <p class="section-sub">Built for people who want real control over their finances — not just another expense logger.</p>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;" class="reveal">
-    <div class="card" style="border-top:3px solid var(--primary);"><div style="font-size:32px;margin-bottom:16px;">&#128179;</div><h3 style="font-size:18px;margin-bottom:10px;color:var(--on-bg);">Multiple Wallets</h3><p style="color:var(--on-surface-variant);font-size:14px;line-height:1.7;">Cash, Bank, Credit Card, Digital Wallet, Savings &#8212; each with its own currency, colour, and live balance.</p></div>
-    <div class="card" style="border-top:3px solid var(--tertiary);"><div style="font-size:32px;margin-bottom:16px;">&#128202;</div><h3 style="font-size:18px;margin-bottom:10px;color:var(--on-bg);">Smart Budgets</h3><p style="color:var(--on-surface-variant);font-size:14px;line-height:1.7;">Recurring budgets with rollover, alert thresholds, and real-time statuses so you always know where you stand.</p></div>
-    <div class="card" style="border-top:3px solid var(--secondary);"><div style="font-size:32px;margin-bottom:16px;">&#128200;</div><h3 style="font-size:18px;margin-bottom:10px;color:var(--on-bg);">Rich Analytics</h3><p style="color:var(--on-surface-variant);font-size:14px;line-height:1.7;">Pie charts, line charts, savings rate rings and category breakdowns &#8212; all responding to your date range.</p></div>
-  </div>
-</section>
+    <!-- ══ HOW IT WORKS ══ -->
+    <section class="section">
+        <div class="section-label">Simple by design</div>
+        <h2 class="section-title">Up and running in minutes.</h2>
+        <p class="section-sub">No account. No cloud. Just install and start tracking.</p>
 
-<div class="divider"></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px;margin-top:16px;"
+            class="reveal">
+            <div style="text-align:center;">
+                <div
+                    style="width:64px;height:64px;background:rgba(227,196,109,0.12);border:1px solid rgba(227,196,109,0.25);border-radius:20px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--primary);margin:0 auto 20px;">
+                    1</div>
+                <h3 style="font-size:17px;margin-bottom:8px;color:var(--on-bg);font-family:'Syne',sans-serif;">Install
+                </h3>
+                <p style="color:var(--on-surface-variant);font-size:14px;">Download from Google Play. No sign-up needed.
+                </p>
+            </div>
+            <div style="text-align:center;">
+                <div
+                    style="width:64px;height:64px;background:rgba(173,207,174,0.1);border:1px solid rgba(173,207,174,0.2);border-radius:20px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--tertiary);margin:0 auto 20px;">
+                    2</div>
+                <h3 style="font-size:17px;margin-bottom:8px;color:var(--on-bg);font-family:'Syne',sans-serif;">Set up
+                    wallets</h3>
+                <p style="color:var(--on-surface-variant);font-size:14px;">Add your cash, bank accounts and cards with
+                    opening balances.</p>
+            </div>
+            <div style="text-align:center;">
+                <div
+                    style="width:64px;height:64px;background:rgba(213,197,161,0.1);border:1px solid rgba(213,197,161,0.15);border-radius:20px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--secondary);margin:0 auto 20px;">
+                    3</div>
+                <h3 style="font-size:17px;margin-bottom:8px;color:var(--on-bg);font-family:'Syne',sans-serif;">Track
+                    &amp; analyse</h3>
+                <p style="color:var(--on-surface-variant);font-size:14px;">Log transactions, set budgets, and watch the
+                    analytics build automatically.</p>
+            </div>
+        </div>
+    </section>
 
-<section class="section">
-  <div class="section-label">Simple by design</div>
-  <h2 class="section-title">Up and running in minutes.</h2>
-  <p class="section-sub">No account. No cloud. Just install and start tracking.</p>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px;margin-top:16px;" class="reveal">
-    <div style="text-align:center;"><div style="width:64px;height:64px;background:rgba(227,196,109,0.12);border:1px solid rgba(227,196,109,0.25);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 20px;font-family:'Syne',sans-serif;font-weight:800;color:var(--primary);">1</div><h3 style="font-size:17px;margin-bottom:8px;color:var(--on-bg);font-family:'Syne',sans-serif;">Install</h3><p style="color:var(--on-surface-variant);font-size:14px;">Download from Google Play. No sign-up needed.</p></div>
-    <div style="text-align:center;"><div style="width:64px;height:64px;background:rgba(173,207,174,0.1);border:1px solid rgba(173,207,174,0.2);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 20px;font-family:'Syne',sans-serif;font-weight:800;color:var(--tertiary);">2</div><h3 style="font-size:17px;margin-bottom:8px;color:var(--on-bg);font-family:'Syne',sans-serif;">Set up wallets</h3><p style="color:var(--on-surface-variant);font-size:14px;">Add your cash, bank accounts and cards with opening balances.</p></div>
-    <div style="text-align:center;"><div style="width:64px;height:64px;background:rgba(213,197,161,0.1);border:1px solid rgba(213,197,161,0.15);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 20px;font-family:'Syne',sans-serif;font-weight:800;color:var(--secondary);">3</div><h3 style="font-size:17px;margin-bottom:8px;color:var(--on-bg);font-family:'Syne',sans-serif;">Track &amp; analyse</h3><p style="color:var(--on-surface-variant);font-size:14px;">Log transactions, set budgets, and watch the analytics build automatically.</p></div>
-  </div>
-</section>
+    <div class="divider"></div>
 
-<div class="divider"></div>
+    <!-- ══ DOWNLOAD CTA ══ -->
+    <section id="download" class="section" style="text-align:center;">
+        <div class="glow"
+            style="width:500px;height:300px;background:rgba(227,196,109,0.06);top:0;left:50%;transform:translateX(-50%);">
+        </div>
+        <div class="reveal" style="position:relative;z-index:1;">
+            <img src="logo.png" alt="My Budget"
+                style="width:80px;height:80px;border-radius:22px;margin-bottom:24px;box-shadow:0 16px 48px rgba(227,196,109,0.3);">
+            <h2 style="font-size:clamp(28px,4vw,48px);margin-bottom:16px;">Ready to take control?</h2>
+            <p style="color:var(--on-surface-variant);font-size:17px;max-width:480px;margin:0 auto 40px;">Free to
+                download. Works offline. Your data never leaves your device.</p>
+            <a href="#" class="btn btn-primary" style="font-size:16px;padding:16px 36px;display:inline-flex;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="margin-right:10px;">
+                    <path
+                        d="M3.18 23.76A1.5 1.5 0 0 0 4.5 24c.28 0 .57-.07.83-.22l11.65-6.6-2.96-2.96-10.84 8.54zM.23 1.01A1.5 1.5 0 0 0 0 1.75v20.5c0 .27.06.52.17.74l.09.13 11.5-11.5v-.27L.32.88l-.09.13zM20.47 9.65l-3.03-1.72-3.28 3.28 3.28 3.28 3.05-1.73a1.75 1.75 0 0 0 0-3.11zM3.18.24l10.84 8.55 2.96-2.96L5.33.23A1.5 1.5 0 0 0 3.18.24z" />
+                </svg>
+                Download on Google Play
+            </a>
+            <p style="margin-top:16px;font-size:13px;color:var(--surface-variant);">Android 8.0+ &middot; Free &middot;
+                No account required</p>
+        </div>
+    </section>
 
-<section id="download" class="section" style="text-align:center;">
-  <div class="glow" style="width:500px;height:300px;background:rgba(227,196,109,0.06);top:0;left:50%;transform:translateX(-50%);"></div>
-  <div class="reveal" style="position:relative;z-index:1;">
-    <img src="ic_launcher_monochrome.png" alt="My Budget" style="width:80px;height:80px;border-radius:22px;margin-bottom:24px;box-shadow:0 16px 48px rgba(227,196,109,0.3);">
-    <h2 style="font-size:clamp(28px,4vw,48px);margin-bottom:16px;">Ready to take control?</h2>
-    <p style="color:var(--on-surface-variant);font-size:17px;max-width:480px;margin:0 auto 40px;">Free to download. Works offline. Your data never leaves your device.</p>
-    <a href="#" class="btn btn-primary" style="font-size:16px;padding:16px 36px;display:inline-flex;">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="margin-right:10px;"><path d="M3.18 23.76A1.5 1.5 0 0 0 4.5 24c.28 0 .57-.07.83-.22l11.65-6.6-2.96-2.96-10.84 8.54zM.23 1.01A1.5 1.5 0 0 0 0 1.75v20.5c0 .27.06.52.17.74l.09.13 11.5-11.5v-.27L.32.88l-.09.13zM20.47 9.65l-3.03-1.72-3.28 3.28 3.28 3.28 3.05-1.73a1.75 1.75 0 0 0 0-3.11zM3.18.24l10.84 8.55 2.96-2.96L5.33.23A1.5 1.5 0 0 0 3.18.24z"/></svg>
-      Download on Google Play
-    </a>
-    <p style="margin-top:16px;font-size:13px;color:var(--surface-variant);">Android 8.0+ &middot; Free &middot; No account required</p>
-  </div>
-</section>
+    <footer>
+        <div class="footer-inner">
+            <a href="index.html" class="footer-logo">
+                <img src="logo.png" alt="My Budget" />
+                <span>My Budget</span>
+            </a>
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="mailto:herohlabs@gmail.com">Contact</a></li>
+            </ul>
+            <p class="footer-copy">&copy; 2026 Herohlabs. All rights reserved.</p>
+        </div>
+    </footer>
 
-<footer>
-  <div class="footer-inner">
-    <a href="index.html" class="footer-logo">
-      <img src="ic_launcher_monochrome.png" alt="My Budget"/>
-      <span>My Budget</span>
-    </a>
-    <ul class="footer-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="features.html">Features</a></li>
-      <li><a href="support.html">Support</a></li>
-      <li><a href="privacy.html">Privacy Policy</a></li>
-      <li><a href="mailto:herohlabs@gmail.com">Contact</a></li>
-    </ul>
-    <p class="footer-copy">&copy; 2026 Herohlabs. All rights reserved.</p>
-  </div>
-</footer>
-
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  document.getElementById('nav-home').classList.add('active');
-</script>
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        document.getElementById('nav-home').classList.add('active');
+    </script>
 </body>
+
 </html>
