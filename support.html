@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Support — My Budget</title>
+  <link rel="stylesheet" href="shared.css"/>
+  <style>
+    .faq-item { border:1px solid rgba(227,196,109,0.1); border-radius:16px; overflow:hidden; margin-bottom:12px; transition:border-color 0.2s; }
+    .faq-item.open { border-color:rgba(227,196,109,0.3); }
+    .faq-q { display:flex; justify-content:space-between; align-items:center; padding:20px 24px; cursor:pointer; background:var(--surface); transition:background 0.2s; }
+    .faq-q:hover { background:var(--surface-2); }
+    .faq-q span { font-weight:600; font-size:15px; color:var(--on-bg); }
+    .faq-icon { color:var(--primary); font-size:20px; transition:transform 0.3s ease; flex-shrink:0; }
+    .faq-item.open .faq-icon { transform:rotate(45deg); }
+    .faq-a { max-height:0; overflow:hidden; transition:max-height 0.4s ease, padding 0.3s ease; background:var(--surface-2); padding:0 24px; }
+    .faq-item.open .faq-a { max-height:400px; padding:20px 24px; }
+    .faq-a p, .faq-a li { font-size:14px; color:var(--on-surface-variant); line-height:1.75; }
+    .faq-a ul { padding-left:16px; margin-top:8px; }
+    .faq-a li { margin-bottom:4px; }
+  </style>
+</head>
+<body>
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="ic_launcher_monochrome.png" alt="My Budget Logo">
+    <span>My Budget</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" id="nav-home">Home</a></li>
+    <li><a href="features.html" id="nav-features">Features</a></li>
+    <li><a href="support.html" id="nav-support">Support</a></li>
+    <li><a href="privacy.html" id="nav-privacy">Privacy</a></li>
+    <li><a href="#download" class="nav-cta">Download</a></li>
+  </ul>
+</nav>
+
+
+<div style="padding-top:68px;">
+  <section class="section" style="padding-bottom:48px;">
+    <div class="section-label">Help centre</div>
+    <h1 class="section-title">How can we help?</h1>
+    <p class="section-sub">Find answers to common questions about My Budget, or reach out directly.</p>
+  </section>
+
+  <section class="section" style="padding-top:0;display:grid;grid-template-columns:1fr 340px;gap:64px;align-items:start;" id="faq-section">
+    <div>
+      <!-- WALLETS FAQ -->
+      <div style="margin-bottom:40px;">
+        <h2 style="font-size:18px;font-family:'Syne',sans-serif;color:var(--primary);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(227,196,109,0.15);">&#128179; Wallets &amp; Transfers</h2>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <span>How do I transfer money between wallets?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            <p>Tap the quick-add FAB on the Home screen and select <strong>Transfer</strong> as the transaction type. Choose the source wallet, destination wallet, and amount. Both wallet balances update instantly — the source decreases and the destination increases.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <span>Can I use different currencies in different wallets?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            <p>Yes. Each wallet has its own currency setting. When you create or edit a wallet, select the currency and it will be used for all balance displays and transaction amounts within that wallet.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <span>What happens to my balance if I delete a transaction?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            <p>The wallet balance is reversed automatically. If you delete an expense, the amount is added back to the wallet. If you delete an income, it is subtracted. For transfers, both wallets are corrected. This keeps your balances always accurate.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- BUDGETS FAQ -->
+      <div style="margin-bottom:40px;">
+        <h2 style="font-size:18px;font-family:'Syne',sans-serif;color:var(--primary);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(227,196,109,0.15);">&#128202; Budgets</h2>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <span>How does budget rollover work?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            <p>When a recurring budget period ends, any <strong>unspent amount</strong> is carried forward and added to the next period's limit. For example, if your monthly food budget is 200,000 and you only spent 140,000, the next month's limit becomes 260,000.</p>
+            <p style="margin-top:8px;">By default the rollover is <strong>capped at the original limit</strong> to prevent the budget from snowballing over many periods. You can change this cap in the budget settings to any amount you prefer.</p>
+            <p style="margin-top:8px;">Budget cards that have a rollover amount show a <span style="background:rgba(173,207,174,0.1);color:var(--tertiary);padding:2px 8px;border-radius:6px;font-size:12px;">&#8617; carried from last period</span> note so you always know why the limit changed.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <span>What do the budget status labels mean?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            <ul>
+              <li><strong style="color:var(--tertiary);">Active</strong> — spending is within the safe zone (below alert threshold)</li>
+              <li><strong style="color:var(--primary);">Near Limit</strong> — you have crossed the alert threshold (default 80%)</li>
+              <li><strong style="color:var(--error);">Over Budget</strong> — spending has exceeded the budget limit</li>
+              <li><strong style="color:var(--on-surface-variant);">Underfunded</strong> — the wallet balance is too low to support this budget</li>
+              <li><strong style="color:var(--on-surface-variant);">Completed</strong> — the budget period has ended with no further transactions</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <span>Do recurring budgets advance automatically?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            <p>Yes. Each time you open the app, My Budget checks all recurring budgets. If a period has ended, the budget automatically advances to the new period — applying rollover if enabled and archiving the old period in history. You never need to manually reset a budget.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <span>What happens to my transactions if I delete a budget?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            <p>Your transactions are <strong>kept</strong>. Deleting a budget only removes the budget itself and clears the budget link from any associated transactions. No transaction data or wallet balances are affected.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECURRING TRANSACTIONS FAQ -->
+      <div style="margin-bottom:40px;">
+        <h2 style="font-size:18px;font-family:'Syne',sans-serif;color:var(--primary);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(227,196,109,0.15);">&#128260; Recurring Transactions</h2>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <span>What happens if I don't open the app for several days?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            <p>No problem. When you next open the app, My Budget automatically creates <strong>all missed occurrences</strong> of recurring transactions, each with the correct historical date. For example, if you have a weekly subscription and you haven't opened the app in 3 weeks, 3 entries will be created with their correct dates — and your wallet balance will reflect all of them.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <span>Can I delete just one occurrence of a recurring transaction?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            <p>Yes. When you delete a recurring transaction you will be asked whether to delete <strong>just this occurrence</strong> or the <strong>entire series</strong>. Either way, the wallet balance is correctly reversed for whichever entries are removed.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANALYTICS FAQ -->
+      <div style="margin-bottom:40px;">
+        <h2 style="font-size:18px;font-family:'Syne',sans-serif;color:var(--primary);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(227,196,109,0.15);">&#128200; Analytics &amp; Date Navigation</h2>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <span>Why does the line chart show different data to the other charts?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            <p>The line chart (income vs expenses over time) has its own independent timeline with a period toggle: Daily (last 14 days), Weekly (last 8 weeks), or Monthly (last 6 months). This is intentional — it gives you a rolling trend view that works independently from the date range picker you use for other sections.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggle(this)">
+            <span>How does the date navigation work?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            <p>The date picker has four modes — Day, Week, Month and Custom. The chevron arrows shift by the correct calendar unit for each mode:</p>
+            <ul>
+              <li><strong>Month</strong> — snaps to exact calendar boundaries (e.g. Mar 1–31)</li>
+              <li><strong>Week</strong> — shifts exactly 7 days</li>
+              <li><strong>Day</strong> — shifts one calendar day, showing "Today" or "Yesterday" labels</li>
+              <li><strong>Custom</strong> — shifts by the same duration as your custom range</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div style="position:sticky;top:88px;">
+      <div class="card" style="margin-bottom:20px;">
+        <div style="font-size:24px;margin-bottom:12px;">&#9993;&#65039;</div>
+        <h3 style="font-size:17px;margin-bottom:8px;">Still need help?</h3>
+        <p style="font-size:14px;color:var(--on-surface-variant);margin-bottom:20px;line-height:1.65;">Couldn't find what you're looking for? Send us a message and we'll get back to you.</p>
+        <a href="mailto:herohlabs@gmail.com" class="btn btn-primary" style="width:100%;justify-content:center;">Email Support</a>
+      </div>
+      <div class="card">
+        <div style="font-size:24px;margin-bottom:12px;">&#128274;</div>
+        <h3 style="font-size:17px;margin-bottom:8px;">Privacy first</h3>
+        <p style="font-size:14px;color:var(--on-surface-variant);margin-bottom:16px;line-height:1.65;">All your data stays on your device. No account, no cloud sync, no data sharing.</p>
+        <a href="privacy.html" style="font-size:14px;color:var(--primary);text-decoration:none;">Read Privacy Policy &#8594;</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">
+      <img src="ic_launcher_monochrome.png" alt="My Budget"/>
+      <span>My Budget</span>
+    </a>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="features.html">Features</a></li>
+      <li><a href="support.html">Support</a></li>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="mailto:herohlabs@gmail.com">Contact</a></li>
+    </ul>
+    <p class="footer-copy">&copy; 2026 Herohlabs. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  function toggle(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.getElementById('nav-support').classList.add('active');
+</script>
+</body>
+</html>
