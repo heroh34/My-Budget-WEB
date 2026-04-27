@@ -33,7 +33,47 @@
     <li><a href="privacy.html" id="nav-privacy">Privacy</a></li>
     <li><a href="#download" class="nav-cta">Download</a></li>
   </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu" onclick="toggleDrawer()">
+        <span></span><span></span><span></span>
+    </button>
 </nav>
+<div class="nav-drawer" id="nav-drawer">
+  <a href="index.html" class="">Home</a>
+  <a href="features.html" class="active">Features</a>
+  <a href="support.html" class="">Support</a>
+  <a href="privacy.html" class="">Privacy</a>
+  <a href="delete-account.html" class=" drawer-delete">Delete Account</a>
+  <a href="#download" class="drawer-cta">Download</a>
+</div>
+
+<script>
+  function toggleDrawer() {
+    const drawer = document.getElementById('nav-drawer');
+    const burger = document.getElementById('hamburger');
+    const isOpen = drawer.classList.contains('open');
+    drawer.classList.toggle('open', !isOpen);
+    burger.classList.toggle('open', !isOpen);
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  }
+  // Close drawer on outside tap
+  document.addEventListener('click', function(e) {
+    const drawer = document.getElementById('nav-drawer');
+    const burger = document.getElementById('hamburger');
+    if (!drawer.contains(e.target) && !burger.contains(e.target) && drawer.classList.contains('open')) {
+      drawer.classList.remove('open');
+      burger.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+  // Close on nav link click
+  document.querySelectorAll('.nav-drawer a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('nav-drawer').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
 
 <div style="padding-top:68px;">
   <section class="section" style="padding-bottom:48px;">
@@ -58,21 +98,20 @@
       </div>
       <div class="feature-visual">
         <div style="display:flex;flex-direction:column;gap:12px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--surface-2);border-radius:0px;border-left:3px solid var(--primary);">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--surface-2);border-radius:14px;border-left:3px solid var(--primary);">
             <div style="display:flex;align-items:center;gap:12px;"><span style="font-size:20px;">&#128176;</span><div><div style="font-weight:600;font-size:14px;">Cash</div><div style="font-size:11px;color:var(--on-surface-variant);">UGX</div></div></div>
             <div style="font-weight:700;color:var(--primary);">450,000</div>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--surface-2);border-radius:0px;border-left:3px solid var(--tertiary);">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--surface-2);border-radius:14px;border-left:3px solid var(--tertiary);">
             <div style="display:flex;align-items:center;gap:12px;"><span style="font-size:20px;">&#127974;</span><div><div style="font-weight:600;font-size:14px;">Stanbic Bank</div><div style="font-size:11px;color:var(--on-surface-variant);">UGX</div></div></div>
             <div style="font-weight:700;color:var(--tertiary);">1,800,000</div>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--surface-2);border-radius:0px;border-left:3px solid var(--secondary);">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--surface-2);border-radius:14px;border-left:3px solid var(--secondary);">
             <div style="display:flex;align-items:center;gap:12px;"><span style="font-size:20px;">&#128247;</span><div><div style="font-weight:600;font-size:14px;">MTN Mobile Money</div><div style="font-size:11px;color:var(--on-surface-variant);">UGX</div></div></div>
             <div style="font-weight:700;color:var(--secondary);">200,000</div>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--surface-2);border-radius:0px;border-left:3px solid rgba(76,70,57,0.8);">
-            <div style="display:flex;align-items:center;gap:12px;">
-              <span style="font-size:20px;">&#128184;</span><div><div style="font-weight:600;font-size:14px;">Savings Jar</div><div style="font-size:11px;color:var(--on-surface-variant);">UGX</div></div></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--surface-2);border-radius:14px;border-left:3px solid rgba(76,70,57,0.8);">
+            <div style="display:flex;align-items:center;gap:12px;"><span style="font-size:20px;">&#128184;</span><div><div style="font-weight:600;font-size:14px;">Savings Jar</div><div style="font-size:11px;color:var(--on-surface-variant);">UGX</div></div></div>
             <div style="font-weight:700;color:var(--on-surface-variant);">50,000</div>
           </div>
           <div style="text-align:center;padding:10px;border-top:1px solid rgba(227,196,109,0.1);margin-top:4px;"><div style="font-size:11px;color:var(--on-surface-variant);">Total Balance</div><div style="font-size:22px;font-weight:800;color:var(--primary);font-family:'Syne',sans-serif;">UGX 2,500,000</div></div>
@@ -252,7 +291,7 @@
       <div class="feature-visual">
         <div style="display:flex;flex-direction:column;gap:12px;">
           <!-- Notification cards -->
-          <div style="background:var(--surface-2);border-radius:0px;padding:14px 16px;border-left:3px solid var(--primary);display:flex;gap:12px;align-items:flex-start;">
+          <div style="background:var(--surface-2);border-radius:14px;padding:14px 16px;border-left:3px solid var(--primary);display:flex;gap:12px;align-items:flex-start;">
             <span style="font-size:20px;">&#128276;</span>
             <div>
               <div style="font-size:13px;font-weight:600;color:var(--on-bg);margin-bottom:2px;">Budget Warning — Food &amp; Drink</div>
@@ -260,7 +299,7 @@
               <div style="font-size:10px;color:var(--surface-variant);margin-top:6px;">2 min ago</div>
             </div>
           </div>
-          <div style="background:var(--surface-2);border-radius:0px;padding:14px 16px;border-left:3px solid var(--error);display:flex;gap:12px;align-items:flex-start;">
+          <div style="background:var(--surface-2);border-radius:14px;padding:14px 16px;border-left:3px solid var(--error);display:flex;gap:12px;align-items:flex-start;">
             <span style="font-size:20px;">&#9888;&#65039;</span>
             <div>
               <div style="font-size:13px;font-weight:600;color:var(--on-bg);margin-bottom:2px;">Over Budget — Entertainment</div>
@@ -268,7 +307,7 @@
               <div style="font-size:10px;color:var(--surface-variant);margin-top:6px;">1 hour ago</div>
             </div>
           </div>
-          <div style="background:var(--surface-2);border-radius:0px;padding:14px 16px;border-left:3px solid var(--tertiary);display:flex;gap:12px;align-items:flex-start;">
+          <div style="background:var(--surface-2);border-radius:14px;padding:14px 16px;border-left:3px solid var(--tertiary);display:flex;gap:12px;align-items:flex-start;">
             <span style="font-size:20px;">&#128260;</span>
             <div>
               <div style="font-size:13px;font-weight:600;color:var(--on-bg);margin-bottom:2px;">Upcoming — Rent due tomorrow</div>
@@ -337,7 +376,8 @@
       <li><a href="features.html">Features</a></li>
       <li><a href="support.html">Support</a></li>
       <li><a href="privacy.html">Privacy Policy</a></li>
-      <li><a href="mailto:herohlabs@gmail.com">Contact</a></li>
+      <li><a href="delete-account.html" style="color:var(--error);">Delete Account</a></li>
+                <li><a href="mailto:herohlabs@gmail.com">Contact</a></li>
     </ul>
     <p class="footer-copy">&copy; 2026 Herohlabs. All rights reserved.</p>
   </div>

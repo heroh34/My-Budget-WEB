@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Delete Account — My Budget</title>
+  <link rel="stylesheet" href="shared.css"/>
+  <style>
+    /* ── PAGE LAYOUT ── */
+    .page-wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 24px 64px;
+      position: relative;
+    }
+
+    .card-shell {
+      width: 100%;
+      max-width: 520px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── STEP INDICATOR ── */
+    .steps {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 36px;
+    }
+
+    .step-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      border: 2px solid rgba(255,180,171,0.3);
+      color: var(--on-surface-variant);
+      background: var(--surface);
+      transition: all 0.35s ease;
+      flex-shrink: 0;
+    }
+
+    .step-dot.active {
+      border-color: var(--error);
+      color: var(--error);
+      background: rgba(255,180,171,0.08);
+      box-shadow: 0 0 0 4px rgba(255,180,171,0.1);
+    }
+
+    .step-dot.done {
+      border-color: var(--error);
+      background: var(--error);
+      color: #3D0A00;
+    }
+
+    .step-line {
+      flex: 1;
+      height: 2px;
+      background: rgba(255,180,171,0.15);
+      margin: 0 8px;
+      border-radius: 2px;
+      transition: background 0.35s ease;
+    }
+
+    .step-line.done { background: rgba(255,180,171,0.5); }
+
+    .step-label {
+      font-size: 11px;
+      color: var(--on-surface-variant);
+      margin-top: 6px;
+      text-align: center;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .steps-wrapper {
+      margin-bottom: 36px;
+    }
+
+    .steps-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      padding: 0 4px;
+    }
+
+    /* ── CARD ── */
+    .delete-card {
+      background: var(--surface);
+      border: 1px solid rgba(255,180,171,0.12);
+      border-radius: 24px;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .delete-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--error), rgba(255,180,171,0.3));
+      border-radius: 24px 24px 0 0;
+    }
+
+    /* ── WARNING ICON ── */
+    .warn-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      background: rgba(255,180,171,0.1);
+      border: 1px solid rgba(255,180,171,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    /* ── REASON OPTIONS ── */
+    .reason-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 24px 0;
+    }
+
+    .reason-option {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(255,180,171,0.12);
+      background: var(--surface-2);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .reason-option:hover {
+      border-color: rgba(255,180,171,0.3);
+      background: rgba(255,180,171,0.05);
+    }
+
+    .reason-option.selected {
+      border-color: var(--error);
+      background: rgba(255,180,171,0.08);
+    }
+
+    .reason-radio {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,180,171,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .reason-option.selected .reason-radio {
+      border-color: var(--error);
+      background: var(--error);
+    }
+
+    .reason-option.selected .reason-radio::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #3D0A00;
+    }
+
+    .reason-text {
+      font-size: 14px;
+      color: var(--on-surface-variant);
+      line-height: 1.4;
+    }
+
+    .reason-option.selected .reason-text {
+      color: var(--on-bg);
+    }
+
+    /* ── CONSEQUENCES LIST ── */
+    .consequences {
+      background: rgba(255,180,171,0.05);
+      border: 1px solid rgba(255,180,171,0.12);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin: 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .consequence-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 13px;
+      color: var(--on-surface-variant);
+      line-height: 1.5;
+    }
+
+    .consequence-item span:first-child {
+      color: var(--error);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── INPUT ── */
+    .input-group {
+      margin: 20px 0;
+    }
+
+    .input-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--on-surface-variant);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .input-field {
+      width: 100%;
+      background: var(--surface-2);
+      border: 1.5px solid rgba(255,180,171,0.15);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: var(--on-bg);
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .input-field::placeholder {
+      color: var(--surface-variant);
+    }
+
+    .input-field:focus {
+      border-color: var(--error);
+    }
+
+    .input-field.error-state {
+      border-color: var(--error);
+      background: rgba(255,180,171,0.04);
+    }
+
+    .input-hint {
+      font-size: 12px;
+      color: var(--on-surface-variant);
+      margin-top: 6px;
+    }
+
+    .input-hint.error-msg {
+      color: var(--error);
+    }
+
+    /* ── BUTTONS ── */
+    .btn-delete {
+      width: 100%;
+      padding: 15px;
+      border-radius: 14px;
+      background: var(--error);
+      color: #3D0A00;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .btn-delete:hover:not(:disabled) {
+      background: #ffc8c0;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(255,180,171,0.25);
+    }
+
+    .btn-delete:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-back {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      background: transparent;
+      color: var(--on-surface-variant);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      border: 1.5px solid rgba(255,255,255,0.08);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .btn-back:hover {
+      border-color: rgba(255,255,255,0.15);
+      color: var(--on-bg);
+    }
+
+    .btn-next {
+      width: 100%;
+      padding: 15px;
+      border-radius: 14px;
+      background: rgba(255,180,171,0.12);
+      color: var(--error);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      border: 1.5px solid rgba(255,180,171,0.25);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      margin-top: 8px;
+    }
+
+    .btn-next:hover:not(:disabled) {
+      background: rgba(255,180,171,0.18);
+      border-color: var(--error);
+    }
+
+    .btn-next:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    /* ── STEP PANELS ── */
+    .step-panel {
+      display: none;
+      animation: fadeSlide 0.3s ease;
+    }
+
+    .step-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateX(16px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .step-panel.back-anim {
+      animation: fadeSlideBack 0.3s ease;
+    }
+
+    @keyframes fadeSlideBack {
+      from { opacity: 0; transform: translateX(-16px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ── SUCCESS STATE (on index.html redirect) ── */
+    /* handled via URL param on index.html */
+
+    /* ── MOBILE ── */
+    @media (max-width: 480px) {
+      .delete-card { padding: 28px 20px; }
+      .page-wrap { padding: 88px 16px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="My Budget Logo">
+    <span>My Budget</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" id="nav-home">Home</a></li>
+    <li><a href="features.html" id="nav-features">Features</a></li>
+    <li><a href="support.html" id="nav-support">Support</a></li>
+    <li><a href="privacy.html" id="nav-privacy">Privacy</a></li>
+    <li><a href="#download" class="nav-cta">Download</a></li>
+  </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu" onclick="toggleDrawer()">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+<div class="nav-drawer" id="nav-drawer">
+  <a href="index.html" class="">Home</a>
+  <a href="features.html" class="">Features</a>
+  <a href="support.html" class="">Support</a>
+  <a href="privacy.html" class="">Privacy</a>
+  <a href="delete-account.html" class="active drawer-delete">Delete Account</a>
+  <a href="#download" class="drawer-cta">Download</a>
+</div>
+
+<script>
+  function toggleDrawer() {
+    const drawer = document.getElementById('nav-drawer');
+    const burger = document.getElementById('hamburger');
+    const isOpen = drawer.classList.contains('open');
+    drawer.classList.toggle('open', !isOpen);
+    burger.classList.toggle('open', !isOpen);
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  }
+  // Close drawer on outside tap
+  document.addEventListener('click', function(e) {
+    const drawer = document.getElementById('nav-drawer');
+    const burger = document.getElementById('hamburger');
+    if (!drawer.contains(e.target) && !burger.contains(e.target) && drawer.classList.contains('open')) {
+      drawer.classList.remove('open');
+      burger.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+  // Close on nav link click
+  document.querySelectorAll('.nav-drawer a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('nav-drawer').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
+
+<!-- Background glows -->
+<div class="glow" style="width:500px;height:500px;background:rgba(255,180,171,0.04);top:-100px;right:-100px;pointer-events:none;position:fixed;z-index:0;border-radius:50%;filter:blur(80px);"></div>
+<div class="glow" style="width:300px;height:300px;background:rgba(255,180,171,0.03);bottom:0;left:-80px;pointer-events:none;position:fixed;z-index:0;border-radius:50%;filter:blur(80px);"></div>
+
+<div class="page-wrap">
+  <div class="card-shell">
+
+    <!-- ── STEP INDICATOR ── -->
+    <div class="steps-wrapper">
+      <div class="steps">
+        <div class="step-dot active" id="dot-1">1</div>
+        <div class="step-line" id="line-1"></div>
+        <div class="step-dot" id="dot-2">2</div>
+      </div>
+      <div class="steps-labels">
+        <span class="step-label" style="color:var(--error);">Select reason</span>
+        <span class="step-label" id="label-2">Confirm deletion</span>
+      </div>
+    </div>
+
+    <div class="delete-card">
+
+      <!-- ══ STEP 1: REASON SELECTION ══ -->
+      <div class="step-panel active" id="step-1">
+        <div class="warn-icon">&#9888;&#65039;</div>
+        <h1 style="font-size:22px;font-family:'Syne',sans-serif;margin-bottom:8px;color:var(--on-bg);">Delete your account</h1>
+        <p style="font-size:14px;color:var(--on-surface-variant);line-height:1.7;">We're sorry to see you go. Before you continue, please let us know why you're leaving — your feedback helps us improve.</p>
+
+        <div class="reason-list" id="reason-list">
+          <div class="reason-option" onclick="selectReason(this, 'privacy')">
+            <div class="reason-radio"></div>
+            <span class="reason-text">I'm concerned about my privacy or data</span>
+          </div>
+          <div class="reason-option" onclick="selectReason(this, 'not-useful')">
+            <div class="reason-radio"></div>
+            <span class="reason-text">The app doesn't meet my needs</span>
+          </div>
+          <div class="reason-option" onclick="selectReason(this, 'switching')">
+            <div class="reason-radio"></div>
+            <span class="reason-text">I'm switching to a different app</span>
+          </div>
+          <div class="reason-option" onclick="selectReason(this, 'too-complex')">
+            <div class="reason-radio"></div>
+            <span class="reason-text">It's too complicated to use</span>
+          </div>
+          <div class="reason-option" onclick="selectReason(this, 'other')">
+            <div class="reason-radio"></div>
+            <span class="reason-text">Other reason</span>
+          </div>
+        </div>
+
+        <button class="btn-next" id="btn-next" disabled onclick="goToStep2()">
+          Continue &#8594;
+        </button>
+        <button class="btn-back" onclick="window.location.href='index.html'">
+          Cancel — keep my account
+        </button>
+      </div>
+
+      <!-- ══ STEP 2: EMAIL CONFIRMATION ══ -->
+      <div class="step-panel" id="step-2">
+        <div class="warn-icon">&#128274;</div>
+        <h1 style="font-size:22px;font-family:'Syne',sans-serif;margin-bottom:8px;color:var(--on-bg);">Confirm deletion</h1>
+        <p style="font-size:14px;color:var(--on-surface-variant);line-height:1.7;">This action is <strong style="color:var(--error);">permanent and cannot be undone.</strong> The following will be deleted immediately:</p>
+
+        <div class="consequences">
+          <div class="consequence-item"><span>&#215;</span><span>Your account and login credentials</span></div>
+          <div class="consequence-item"><span>&#215;</span><span>All cloud-backed transactions, wallets and budgets</span></div>
+          <div class="consequence-item"><span>&#215;</span><span>Your notification preferences and profile data</span></div>
+          <div class="consequence-item"><span>&#215;</span><span>Any active backup — this cannot be restored</span></div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="email-input">Type your email address to confirm</label>
+          <input
+            class="input-field"
+            id="email-input"
+            type="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+            oninput="onEmailInput(this)"
+          />
+          <p class="input-hint" id="email-hint">Enter the email linked to your My Budget account.</p>
+        </div>
+
+        <button class="btn-delete" id="btn-delete" disabled onclick="submitDeletion()">
+          &#128465;&#65038; Permanently Delete My Account
+        </button>
+        <button class="btn-back" onclick="goToStep1()">
+          &#8592; Go back
+        </button>
+      </div>
+
+    </div><!-- /delete-card -->
+
+    <p style="text-align:center;font-size:13px;color:var(--surface-variant);margin-top:20px;">
+      Changed your mind? <a href="index.html" style="color:var(--primary);text-decoration:none;">Go back home</a>
+    </p>
+
+  </div><!-- /card-shell -->
+</div><!-- /page-wrap -->
+
+<script>
+  let selectedReason = null;
+
+  function selectReason(el, value) {
+    document.querySelectorAll('.reason-option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedReason = value;
+    document.getElementById('btn-next').disabled = false;
+  }
+
+  function goToStep2() {
+    if (!selectedReason) return;
+
+    const s1 = document.getElementById('step-1');
+    const s2 = document.getElementById('step-2');
+
+    s1.classList.remove('active');
+    s2.classList.add('active');
+    s2.classList.remove('back-anim');
+
+    // Update step indicators
+    document.getElementById('dot-1').classList.remove('active');
+    document.getElementById('dot-1').classList.add('done');
+    document.getElementById('dot-1').innerHTML = '&#10003;';
+    document.getElementById('line-1').classList.add('done');
+    document.getElementById('dot-2').classList.add('active');
+    document.getElementById('label-2').style.color = 'var(--error)';
+  }
+
+  function goToStep1() {
+    const s1 = document.getElementById('step-1');
+    const s2 = document.getElementById('step-2');
+
+    s2.classList.remove('active');
+    s1.classList.add('active');
+    s1.classList.add('back-anim');
+    setTimeout(() => s1.classList.remove('back-anim'), 350);
+
+    // Reset step indicators
+    document.getElementById('dot-1').classList.add('active');
+    document.getElementById('dot-1').classList.remove('done');
+    document.getElementById('dot-1').innerHTML = '1';
+    document.getElementById('line-1').classList.remove('done');
+    document.getElementById('dot-2').classList.remove('active');
+    document.getElementById('label-2').style.color = '';
+
+    // Reset email input
+    const inp = document.getElementById('email-input');
+    inp.value = '';
+    inp.classList.remove('error-state');
+    document.getElementById('email-hint').textContent = 'Enter the email linked to your My Budget account.';
+    document.getElementById('email-hint').classList.remove('error-msg');
+    document.getElementById('btn-delete').disabled = true;
+  }
+
+  function onEmailInput(inp) {
+    const val = inp.value.trim();
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+    document.getElementById('btn-delete').disabled = !valid;
+
+    if (val.length > 0 && !valid) {
+      inp.classList.add('error-state');
+      document.getElementById('email-hint').textContent = 'Please enter a valid email address.';
+      document.getElementById('email-hint').classList.add('error-msg');
+    } else {
+      inp.classList.remove('error-state');
+      document.getElementById('email-hint').textContent = 'Enter the email linked to your My Budget account.';
+      document.getElementById('email-hint').classList.remove('error-msg');
+    }
+  }
+
+  function submitDeletion() {
+    const btn = document.getElementById('btn-delete');
+    btn.disabled = true;
+    btn.innerHTML = '<span style="display:inline-block;animation:spin 0.8s linear infinite;">&#8635;</span> &nbsp;Deleting…';
+
+    // Simulate deletion request — replace with your real API call
+    setTimeout(() => {
+      window.location.href = 'index.html?deleted=1';
+    }, 1800);
+  }
+
+  // Spin animation for loading state
+  const style = document.createElement('style');
+  style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+  document.head.appendChild(style);
+</script>
+
+</body>
+</html>

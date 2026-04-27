@@ -37,15 +37,16 @@
         @media (max-width: 768px) {
             .hero-grid {
                 grid-template-columns: 1fr;
-                padding: 64px 24px 0;
+                padding: 64px 20px 0;
                 gap: 40px;
+                max-width: 100vw;
+                overflow: hidden;
             }
 
             .hero-screenshot {
                 margin-top: 0;
-                margin-left: -24px;
-                margin-right: -24px;
                 overflow: hidden;
+                border-radius: 16px;
             }
 
             .hero-screenshot img {
@@ -96,15 +97,52 @@
             <li><a href="privacy.html" id="nav-privacy">Privacy</a></li>
             <li><a href="#download" class="nav-cta">Download</a></li>
         </ul>
-    </nav>
+        <button class="nav-hamburger" id="hamburger" aria-label="Open menu" onclick="toggleDrawer()">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+<div class="nav-drawer" id="nav-drawer">
+  <a href="index.html" class="active">Home</a>
+  <a href="features.html" class="">Features</a>
+  <a href="support.html" class="">Support</a>
+  <a href="privacy.html" class="">Privacy</a>
+  <a href="delete-account.html" class=" drawer-delete">Delete Account</a>
+  <a href="#download" class="drawer-cta">Download</a>
+</div>
+
+<script>
+  function toggleDrawer() {
+    const drawer = document.getElementById('nav-drawer');
+    const burger = document.getElementById('hamburger');
+    const isOpen = drawer.classList.contains('open');
+    drawer.classList.toggle('open', !isOpen);
+    burger.classList.toggle('open', !isOpen);
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  }
+  // Close drawer on outside tap
+  document.addEventListener('click', function(e) {
+    const drawer = document.getElementById('nav-drawer');
+    const burger = document.getElementById('hamburger');
+    if (!drawer.contains(e.target) && !burger.contains(e.target) && drawer.classList.contains('open')) {
+      drawer.classList.remove('open');
+      burger.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+  // Close on nav link click
+  document.querySelectorAll('.nav-drawer a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('nav-drawer').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
 
     <!-- ══ HERO ══ -->
-    <section
-        style="min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:68px;">
-        <div class="glow" style="width:600px;height:600px;background:rgba(227,196,109,0.08);top:-100px;right:-100px;">
-        </div>
-        <div class="glow" style="width:400px;height:400px;background:rgba(173,207,174,0.05);bottom:-50px;left:-50px;">
-        </div>
+    <section style="min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:68px;">
+        <div class="glow" style="width:600px;height:600px;background:rgba(227,196,109,0.08);top:-100px;right:-100px;"></div>
+        <div class="glow" style="width:400px;height:400px;background:rgba(173,207,174,0.05);bottom:-50px;left:-50px;"></div>
 
         <div class="hero-grid">
             <div class="reveal">
@@ -112,16 +150,13 @@
                 <h1 style="font-size:clamp(38px,5vw,64px);margin-bottom:24px;line-height:1.05;">
                     Your money,<br /><span style="color:var(--primary);">finally clear.</span>
                 </h1>
-                <p
-                    style="font-size:18px;color:var(--on-surface-variant);max-width:480px;margin-bottom:40px;line-height:1.75;">
-                    Multiple wallets, smart budgets, recurring transactions and beautiful analytics &mdash; backed up
-                    securely to the cloud, always in sync.
+                <p style="font-size:18px;color:var(--on-surface-variant);max-width:480px;margin-bottom:40px;line-height:1.75;">
+                    Multiple wallets, smart budgets, recurring transactions and beautiful analytics &mdash; backed up securely to the cloud, always in sync.
                 </p>
                 <div style="display:flex;gap:16px;flex-wrap:wrap;">
                     <a href="#download" class="btn btn-primary">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M3.18 23.76A1.5 1.5 0 0 0 4.5 24c.28 0 .57-.07.83-.22l11.65-6.6-2.96-2.96-10.84 8.54zM.23 1.01A1.5 1.5 0 0 0 0 1.75v20.5c0 .27.06.52.17.74l.09.13 11.5-11.5v-.27L.32.88l-.09.13zM20.47 9.65l-3.03-1.72-3.28 3.28 3.28 3.28 3.05-1.73a1.75 1.75 0 0 0 0-3.11zM3.18.24l10.84 8.55 2.96-2.96L5.33.23A1.5 1.5 0 0 0 3.18.24z" />
+                            <path d="M3.18 23.76A1.5 1.5 0 0 0 4.5 24c.28 0 .57-.07.83-.22l11.65-6.6-2.96-2.96-10.84 8.54zM.23 1.01A1.5 1.5 0 0 0 0 1.75v20.5c0 .27.06.52.17.74l.09.13 11.5-11.5v-.27L.32.88l-.09.13zM20.47 9.65l-3.03-1.72-3.28 3.28 3.28 3.28 3.05-1.73a1.75 1.75 0 0 0 0-3.11zM3.18.24l10.84 8.55 2.96-2.96L5.33.23A1.5 1.5 0 0 0 3.18.24z" />
                         </svg>
                         Get on Google Play
                     </a>
@@ -142,45 +177,38 @@
     <section class="section">
         <div class="section-label">What's inside</div>
         <h2 class="section-title">Everything you need,<br />nothing you don't.</h2>
-        <p class="section-sub">Built for people who want real control over their finances &mdash; not just another
-            expense logger.</p>
+        <p class="section-sub">Built for people who want real control over their finances &mdash; not just another expense logger.</p>
 
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;" class="reveal">
             <div class="card" style="border-top:3px solid var(--primary);">
                 <div style="font-size:32px;margin-bottom:16px;">&#128179;</div>
                 <h3 style="font-size:18px;margin-bottom:10px;color:var(--on-bg);">Multiple Wallets</h3>
-                <p style="color:var(--on-surface-variant);font-size:14px;line-height:1.7;">Cash, Bank, Credit Card,
-                    Digital Wallet, Savings &mdash; each with its own currency, colour, and live balance.</p>
+                <p style="color:var(--on-surface-variant);font-size:14px;line-height:1.7;">Cash, Bank, Credit Card, Digital Wallet, Savings &mdash; each with its own currency, colour, and live balance.</p>
             </div>
             <div class="card" style="border-top:3px solid var(--tertiary);">
                 <div style="font-size:32px;margin-bottom:16px;">&#128202;</div>
                 <h3 style="font-size:18px;margin-bottom:10px;color:var(--on-bg);">Smart Budgets</h3>
-                <p style="color:var(--on-surface-variant);font-size:14px;line-height:1.7;">Recurring budgets with
-                    rollover, alert thresholds, and real-time statuses so you always know where you stand.</p>
+                <p style="color:var(--on-surface-variant);font-size:14px;line-height:1.7;">Recurring budgets with rollover, alert thresholds, and real-time statuses so you always know where you stand.</p>
             </div>
             <div class="card" style="border-top:3px solid var(--secondary);">
                 <div style="font-size:32px;margin-bottom:16px;">&#128200;</div>
                 <h3 style="font-size:18px;margin-bottom:10px;color:var(--on-bg);">Rich Analytics</h3>
-                <p style="color:var(--on-surface-variant);font-size:14px;line-height:1.7;">Pie charts, line charts,
-                    savings rate rings and category breakdowns &mdash; all responding to your date range.</p>
+                <p style="color:var(--on-surface-variant);font-size:14px;line-height:1.7;">Pie charts, line charts, savings rate rings and category breakdowns &mdash; all responding to your date range.</p>
             </div>
             <div class="card" style="border-top:3px solid var(--primary);">
                 <div style="font-size:32px;margin-bottom:16px;">&#9729;&#65039;</div>
                 <h3 style="font-size:18px;margin-bottom:10px;color:var(--on-bg);">Cloud Backup</h3>
-                <p style="color:var(--on-surface-variant);font-size:14px;line-height:1.7;">Your data backed up securely
-                    and encrypted. Restore everything instantly if you switch or lose your device.</p>
+                <p style="color:var(--on-surface-variant);font-size:14px;line-height:1.7;">Your data backed up securely and encrypted. Restore everything instantly if you switch or lose your device.</p>
             </div>
             <div class="card" style="border-top:3px solid var(--tertiary);">
                 <div style="font-size:32px;margin-bottom:16px;">&#128276;</div>
                 <h3 style="font-size:18px;margin-bottom:10px;color:var(--on-bg);">Smart Notifications</h3>
-                <p style="color:var(--on-surface-variant);font-size:14px;line-height:1.7;">Budget alerts, recurring
-                    transaction reminders and spending nudges &mdash; delivered right when you need them.</p>
+                <p style="color:var(--on-surface-variant);font-size:14px;line-height:1.7;">Budget alerts, recurring transaction reminders and spending nudges &mdash; delivered right when you need them.</p>
             </div>
             <div class="card" style="border-top:3px solid var(--secondary);">
                 <div style="font-size:32px;margin-bottom:16px;">&#128100;</div>
                 <h3 style="font-size:18px;margin-bottom:10px;color:var(--on-bg);">Your Account</h3>
-                <p style="color:var(--on-surface-variant);font-size:14px;line-height:1.7;">Sign in with email or Google
-                    to unlock backup, notifications and profile management across sessions.</p>
+                <p style="color:var(--on-surface-variant);font-size:14px;line-height:1.7;">Sign in with email or Google to unlock backup, notifications and profile management across sessions.</p>
             </div>
         </div>
     </section>
@@ -191,45 +219,28 @@
     <section class="section">
         <div class="section-label">Simple by design</div>
         <h2 class="section-title">Up and running in minutes.</h2>
-        <p class="section-sub">Sign in once, and your data is always safe &mdash; no manual exports, no risk of loss.
-        </p>
+        <p class="section-sub">Sign in once, and your data is always safe &mdash; no manual exports, no risk of loss.</p>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px;margin-top:16px;"
-            class="reveal">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px;margin-top:16px;" class="reveal">
             <div style="text-align:center;">
-                <div
-                    style="width:64px;height:64px;background:rgba(227,196,109,0.12);border:1px solid rgba(227,196,109,0.25);border-radius:20px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--primary);margin:0 auto 20px;">
-                    1</div>
-                <h3 style="font-size:17px;margin-bottom:8px;color:var(--on-bg);font-family:'Syne',sans-serif;">Install
-                </h3>
+                <div style="width:64px;height:64px;background:rgba(227,196,109,0.12);border:1px solid rgba(227,196,109,0.25);border-radius:20px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--primary);margin:0 auto 20px;">1</div>
+                <h3 style="font-size:17px;margin-bottom:8px;color:var(--on-bg);font-family:'Syne',sans-serif;">Install</h3>
                 <p style="color:var(--on-surface-variant);font-size:14px;">Download from Google Play — free.</p>
             </div>
             <div style="text-align:center;">
-                <div
-                    style="width:64px;height:64px;background:rgba(173,207,174,0.1);border:1px solid rgba(173,207,174,0.2);border-radius:20px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--tertiary);margin:0 auto 20px;">
-                    2</div>
-                <h3 style="font-size:17px;margin-bottom:8px;color:var(--on-bg);font-family:'Syne',sans-serif;">Sign in
-                </h3>
-                <p style="color:var(--on-surface-variant);font-size:14px;">Create an account with email or Google to get
-                    started.</p>
+                <div style="width:64px;height:64px;background:rgba(173,207,174,0.1);border:1px solid rgba(173,207,174,0.2);border-radius:20px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--tertiary);margin:0 auto 20px;">2</div>
+                <h3 style="font-size:17px;margin-bottom:8px;color:var(--on-bg);font-family:'Syne',sans-serif;">Sign in</h3>
+                <p style="color:var(--on-surface-variant);font-size:14px;">Create an account with email or Google to get started.</p>
             </div>
             <div style="text-align:center;">
-                <div
-                    style="width:64px;height:64px;background:rgba(213,197,161,0.1);border:1px solid rgba(213,197,161,0.15);border-radius:20px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--secondary);margin:0 auto 20px;">
-                    3</div>
-                <h3 style="font-size:17px;margin-bottom:8px;color:var(--on-bg);font-family:'Syne',sans-serif;">Set up
-                    wallets</h3>
-                <p style="color:var(--on-surface-variant);font-size:14px;">Add your cash, bank accounts and cards with
-                    opening balances.</p>
+                <div style="width:64px;height:64px;background:rgba(213,197,161,0.1);border:1px solid rgba(213,197,161,0.15);border-radius:20px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--secondary);margin:0 auto 20px;">3</div>
+                <h3 style="font-size:17px;margin-bottom:8px;color:var(--on-bg);font-family:'Syne',sans-serif;">Set up wallets</h3>
+                <p style="color:var(--on-surface-variant);font-size:14px;">Add your cash, bank accounts and cards with opening balances.</p>
             </div>
             <div style="text-align:center;">
-                <div
-                    style="width:64px;height:64px;background:rgba(227,196,109,0.12);border:1px solid rgba(227,196,109,0.25);border-radius:20px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--primary);margin:0 auto 20px;">
-                    4</div>
-                <h3 style="font-size:17px;margin-bottom:8px;color:var(--on-bg);font-family:'Syne',sans-serif;">Track
-                    &amp; analyse</h3>
-                <p style="color:var(--on-surface-variant);font-size:14px;">Log transactions, set budgets, and watch the
-                    analytics build automatically.</p>
+                <div style="width:64px;height:64px;background:rgba(227,196,109,0.12);border:1px solid rgba(227,196,109,0.25);border-radius:20px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--primary);margin:0 auto 20px;">4</div>
+                <h3 style="font-size:17px;margin-bottom:8px;color:var(--on-bg);font-family:'Syne',sans-serif;">Track &amp; analyse</h3>
+                <p style="color:var(--on-surface-variant);font-size:14px;">Log transactions, set budgets, and watch the analytics build automatically.</p>
             </div>
         </div>
     </section>
@@ -238,26 +249,16 @@
 
     <!-- ══ CLOUD BACKUP CALLOUT ══ -->
     <section class="section">
-        <div style="background:var(--surface);border:1px solid rgba(227,196,109,0.15);border-radius:24px;padding:48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;position:relative;overflow:hidden;"
-            class="reveal">
-            <div class="glow" style="width:300px;height:300px;background:rgba(227,196,109,0.05);top:-80px;right:-40px;">
-            </div>
+        <div style="background:var(--surface);border:1px solid rgba(227,196,109,0.15);border-radius:24px;padding:48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;position:relative;overflow:hidden;" class="reveal">
+            <div class="glow" style="width:300px;height:300px;background:rgba(227,196,109,0.05);top:-80px;right:-40px;"></div>
             <div style="position:relative;z-index:1;">
                 <div class="chip" style="margin-bottom:16px;">&#9729;&#65039; Cloud Backup</div>
                 <h2 style="font-size:clamp(22px,3vw,34px);margin-bottom:12px;">Your data is always safe.</h2>
-                <p style="color:var(--on-surface-variant);font-size:16px;line-height:1.75;max-width:520px;">Lose your
-                    phone? Switch devices? Your wallets, budgets and transactions are securely backed up and can be
-                    fully restored in seconds. Encrypted end-to-end, only accessible by you.</p>
+                <p style="color:var(--on-surface-variant);font-size:16px;line-height:1.75;max-width:520px;">Lose your phone? Switch devices? Your wallets, budgets and transactions are securely backed up and can be fully restored in seconds. Encrypted end-to-end, only accessible by you.</p>
                 <div style="display:flex;gap:32px;margin-top:24px;flex-wrap:wrap;">
-                    <div
-                        style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--on-surface-variant);">
-                        <span style="color:var(--primary);">&#10003;</span> Encrypted backup</div>
-                    <div
-                        style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--on-surface-variant);">
-                        <span style="color:var(--primary);">&#10003;</span> One-tap restore</div>
-                    <div
-                        style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--on-surface-variant);">
-                        <span style="color:var(--primary);">&#10003;</span> Sign in with Google or email</div>
+                    <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--on-surface-variant);"><span style="color:var(--primary);">&#10003;</span> Encrypted backup</div>
+                    <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--on-surface-variant);"><span style="color:var(--primary);">&#10003;</span> One-tap restore</div>
+                    <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--on-surface-variant);"><span style="color:var(--primary);">&#10003;</span> Sign in with Google or email</div>
                 </div>
             </div>
             <div style="font-size:72px;position:relative;z-index:1;opacity:0.6;">&#9729;&#65039;</div>
@@ -268,24 +269,18 @@
 
     <!-- ══ DOWNLOAD CTA ══ -->
     <section id="download" class="section" style="text-align:center;">
-        <div class="glow"
-            style="width:500px;height:300px;background:rgba(227,196,109,0.06);top:0;left:50%;transform:translateX(-50%);">
-        </div>
+        <div class="glow" style="width:500px;height:300px;background:rgba(227,196,109,0.06);top:0;left:50%;transform:translateX(-50%);"></div>
         <div class="reveal" style="position:relative;z-index:1;">
-            <img src="logo.png" alt="My Budget"
-                style="width:80px;height:80px;border-radius:22px;margin-bottom:24px;box-shadow:0 16px 48px rgba(227,196,109,0.3);">
+            <img src="logo.png" alt="My Budget" style="width:80px;height:80px;border-radius:22px;margin-bottom:24px;box-shadow:0 16px 48px rgba(227,196,109,0.3);">
             <h2 style="font-size:clamp(28px,4vw,48px);margin-bottom:16px;">Ready to take control?</h2>
-            <p style="color:var(--on-surface-variant);font-size:17px;max-width:480px;margin:0 auto 40px;">Free to
-                download. Sign in to unlock cloud backup, smart notifications and more.</p>
+            <p style="color:var(--on-surface-variant);font-size:17px;max-width:480px;margin:0 auto 40px;">Free to download. Sign in to unlock cloud backup, smart notifications and more.</p>
             <a href="#" class="btn btn-primary" style="font-size:16px;padding:16px 36px;display:inline-flex;">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="margin-right:10px;">
-                    <path
-                        d="M3.18 23.76A1.5 1.5 0 0 0 4.5 24c.28 0 .57-.07.83-.22l11.65-6.6-2.96-2.96-10.84 8.54zM.23 1.01A1.5 1.5 0 0 0 0 1.75v20.5c0 .27.06.52.17.74l.09.13 11.5-11.5v-.27L.32.88l-.09.13zM20.47 9.65l-3.03-1.72-3.28 3.28 3.28 3.28 3.05-1.73a1.75 1.75 0 0 0 0-3.11zM3.18.24l10.84 8.55 2.96-2.96L5.33.23A1.5 1.5 0 0 0 3.18.24z" />
+                    <path d="M3.18 23.76A1.5 1.5 0 0 0 4.5 24c.28 0 .57-.07.83-.22l11.65-6.6-2.96-2.96-10.84 8.54zM.23 1.01A1.5 1.5 0 0 0 0 1.75v20.5c0 .27.06.52.17.74l.09.13 11.5-11.5v-.27L.32.88l-.09.13zM20.47 9.65l-3.03-1.72-3.28 3.28 3.28 3.28 3.05-1.73a1.75 1.75 0 0 0 0-3.11zM3.18.24l10.84 8.55 2.96-2.96L5.33.23A1.5 1.5 0 0 0 3.18.24z" />
                 </svg>
                 Download on Google Play
             </a>
-            <p style="margin-top:16px;font-size:13px;color:var(--surface-variant);">Android 8.0+ &middot; Free &middot;
-                Sign in required</p>
+            <p style="margin-top:16px;font-size:13px;color:var(--surface-variant);">Android 8.0+ &middot; Free &middot; Sign in required</p>
         </div>
     </section>
 
@@ -300,11 +295,27 @@
                 <li><a href="features.html">Features</a></li>
                 <li><a href="support.html">Support</a></li>
                 <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="delete-account.html" style="color:var(--error);">Delete Account</a></li>
                 <li><a href="mailto:herohlabs@gmail.com">Contact</a></li>
             </ul>
             <p class="footer-copy">&copy; 2026 Herohlabs. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- ── DELETION SUCCESS TOAST ── -->
+    <div id="deleted-toast" style="position:fixed;top:84px;left:50%;transform:translateX(-50%);z-index:999;background:var(--surface);border:1px solid rgba(173,207,174,0.3);border-left:4px solid var(--tertiary);border-radius:14px;padding:14px 20px;display:none;align-items:center;gap:12px;min-width:300px;max-width:90vw;box-shadow:0 16px 48px rgba(0,0,0,0.5);">
+        <span style="font-size:20px;color:var(--tertiary);">&#10003;</span>
+        <div>
+            <div style="font-size:14px;font-weight:600;color:var(--tertiary);">Account deleted</div>
+            <div style="font-size:12px;color:var(--on-surface-variant);margin-top:2px;">Your account and all associated data have been permanently removed.</div>
+        </div>
+        <button onclick="this.parentElement.style.display='none'" style="background:none;border:none;color:var(--surface-variant);font-size:20px;cursor:pointer;margin-left:auto;line-height:1;padding:0 4px;">&#215;</button>
+    </div>
+
+    <style>
+        @keyframes toastIn  { from { opacity:0; transform:translateX(-50%) translateY(-14px); } to { opacity:1; transform:translateX(-50%) translateY(0); } }
+        @keyframes toastOut { to   { opacity:0; transform:translateX(-50%) translateY(-10px); } }
+    </style>
 
     <script>
         const observer = new IntersectionObserver((entries) => {
@@ -312,7 +323,18 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         document.getElementById('nav-home').classList.add('active');
+
+        // Show success toast if redirected from delete-account page
+        if (new URLSearchParams(window.location.search).get('deleted') === '1') {
+            const toast = document.getElementById('deleted-toast');
+            toast.style.display = 'flex';
+            toast.style.animation = 'toastIn 0.4s ease forwards';
+            history.replaceState(null, '', window.location.pathname);
+            setTimeout(() => {
+                toast.style.animation = 'toastOut 0.3s ease forwards';
+                setTimeout(() => toast.style.display = 'none', 300);
+            }, 6000);
+        }
     </script>
 </body>
-
 </html>

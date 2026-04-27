@@ -21,8 +21,8 @@
   --on-surface-variant: #CFC5B4;
   --income: #ADCFAE;
   --expense: #FFB4AB;
-  /* --radius: 16px; */
-  --radius-sm: 8px; 
+  --radius: 16px;
+  --radius-sm: 8px;
   --radius-lg: 24px;
 }
 
@@ -347,12 +347,110 @@ footer {
   transform: translateY(0);
 }
 
+/* ── HAMBURGER BUTTON ── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(227, 196, 109, 0.15);
+  background: rgba(227, 196, 109, 0.06);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.nav-hamburger:hover {
+  background: rgba(227, 196, 109, 0.12);
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+
+/* Animated X when open */
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── MOBILE DRAWER ── */
+.nav-drawer {
+  display: none;
+  position: fixed;
+  top: 68px;
+  left: 0; right: 0;
+  background: rgba(22, 19, 11, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(227, 196, 109, 0.12);
+  padding: 16px 20px 24px;
+  z-index: 99;
+  flex-direction: column;
+  gap: 4px;
+  transform: translateY(-8px);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.nav-drawer.open {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.nav-drawer a {
+  display: block;
+  color: var(--on-surface-variant);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 12px 16px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.nav-drawer a:hover,
+.nav-drawer a.active {
+  color: var(--primary);
+  background: rgba(227, 196, 109, 0.08);
+}
+
+.nav-drawer .drawer-cta {
+  margin-top: 8px;
+  background: var(--primary);
+  color: var(--on-primary) !important;
+  font-weight: 700 !important;
+  text-align: center;
+  border-radius: 12px !important;
+}
+
+.nav-drawer .drawer-cta:hover {
+  background: var(--primary-light) !important;
+}
+
+.nav-drawer .drawer-delete {
+  color: var(--error) !important;
+  margin-top: 4px;
+}
+
 /* ── MOBILE ── */
 @media (max-width: 768px) {
   nav { padding: 0 20px; }
   .section { padding: 64px 20px; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
   .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-drawer { display: flex; }
 }
 /* ── MOBILE HORIZONTAL SCROLL FIX ── */
 /* Sections clip their own absolute-positioned glows */

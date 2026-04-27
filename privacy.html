@@ -19,7 +19,47 @@
     <li><a href="privacy.html" id="nav-privacy">Privacy</a></li>
     <li><a href="#download" class="nav-cta">Download</a></li>
   </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu" onclick="toggleDrawer()">
+        <span></span><span></span><span></span>
+    </button>
 </nav>
+<div class="nav-drawer" id="nav-drawer">
+  <a href="index.html" class="">Home</a>
+  <a href="features.html" class="">Features</a>
+  <a href="support.html" class="">Support</a>
+  <a href="privacy.html" class="active">Privacy</a>
+  <a href="delete-account.html" class=" drawer-delete">Delete Account</a>
+  <a href="#download" class="drawer-cta">Download</a>
+</div>
+
+<script>
+  function toggleDrawer() {
+    const drawer = document.getElementById('nav-drawer');
+    const burger = document.getElementById('hamburger');
+    const isOpen = drawer.classList.contains('open');
+    drawer.classList.toggle('open', !isOpen);
+    burger.classList.toggle('open', !isOpen);
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  }
+  // Close drawer on outside tap
+  document.addEventListener('click', function(e) {
+    const drawer = document.getElementById('nav-drawer');
+    const burger = document.getElementById('hamburger');
+    if (!drawer.contains(e.target) && !burger.contains(e.target) && drawer.classList.contains('open')) {
+      drawer.classList.remove('open');
+      burger.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+  // Close on nav link click
+  document.querySelectorAll('.nav-drawer a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('nav-drawer').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
 
 <div style="padding-top:68px;">
   <section class="section" style="max-width:800px;">
@@ -115,7 +155,7 @@
         <div style="background:var(--surface);border:1px solid rgba(227,196,109,0.12);border-radius:12px;padding:20px;margin-top:16px;display:flex;flex-direction:column;gap:10px;">
           <div style="display:flex;gap:10px;font-size:14px;color:var(--on-surface-variant);"><span style="color:var(--primary);">&#10003;</span><span>Deleting individual entries within the app</span></div>
           <div style="display:flex;gap:10px;font-size:14px;color:var(--on-surface-variant);"><span style="color:var(--primary);">&#10003;</span><span>Clearing app data via device settings (removes local cache only)</span></div>
-          <div style="display:flex;gap:10px;font-size:14px;color:var(--on-surface-variant);"><span style="color:var(--primary);">&#10003;</span><span><strong style="color:var(--on-bg);">Deleting your account</strong> from within the app — this permanently removes your account, all cloud-backed financial data and your email from our servers</span></div>
+          <div style="display:flex;gap:10px;font-size:14px;color:var(--on-surface-variant);"><span style="color:var(--primary);">&#10003;</span><span><strong style="color:var(--on-bg);">Deleting your account</strong> — use the <a href="delete-account.html" style="color:var(--primary);">Delete Account page</a> to permanently remove your account, all cloud-backed financial data and your email from our servers</span></div>
           <div style="display:flex;gap:10px;font-size:14px;color:var(--on-surface-variant);"><span style="color:var(--primary);">&#10003;</span><span>Contacting us at <a href="mailto:herohlabs@gmail.com" style="color:var(--primary);">herohlabs@gmail.com</a> to request manual data deletion</span></div>
         </div>
         <p style="color:var(--on-surface-variant);line-height:1.8;font-size:15px;margin-top:12px;">For AdMob data, reset or delete your Android Advertising ID via <strong style="color:var(--on-bg);">Settings &gt; Privacy &gt; Ads</strong>.</p>
@@ -150,7 +190,8 @@
       <li><a href="features.html">Features</a></li>
       <li><a href="support.html">Support</a></li>
       <li><a href="privacy.html">Privacy Policy</a></li>
-      <li><a href="mailto:herohlabs@gmail.com">Contact</a></li>
+      <li><a href="delete-account.html" style="color:var(--error);">Delete Account</a></li>
+                <li><a href="mailto:herohlabs@gmail.com">Contact</a></li>
     </ul>
     <p class="footer-copy">&copy; 2026 Herohlabs. All rights reserved.</p>
   </div>
